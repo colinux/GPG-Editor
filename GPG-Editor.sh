@@ -22,7 +22,7 @@ if [ ! -r "$FILE" ] ; then
 fi
 
 if [ -z "$GPG_KEY" ] ; then
-  echo "You must edit the script to add your GPG key id !"
+  echo "You must edit the script to add your GPG key id !" >&2
   exit 1
 fi
 
@@ -34,7 +34,7 @@ fi
 
 GPG_BIN=`which gpg`
 if [ 0 -ne $? ] ; then
-  echo "GPG command not found in your path"
+  echo "GPG command not found in your path" >&2
   exit 1
 fi
 
@@ -46,7 +46,6 @@ if [ 0 -ne $? ] ; then
 fi
 
 random_filename () {
-  r=""
   r=`head -c 10 < /dev/random | uuencode -m - | tail -n 2 | head -n 1 | cut -c 1-8`
   r=`echo $r | tr -cd "[:alnum:]"`
   r="/tmp/$r"
