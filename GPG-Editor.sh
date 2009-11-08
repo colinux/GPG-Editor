@@ -45,11 +45,12 @@ if [ 0 -ne $? ] ; then
   exit 1
 fi
 
-random_filename () {
-  r=`head -c 10 < /dev/random | uuencode -m - | tail -n 2 | head -n 1 | cut -c 1-8`
-  r=`echo $r | tr -cd "[:alnum:]"`
-  r="/tmp/$r"
 
+# Generates a random (temp) filename
+random_filename () {
+  r="/tmp/"`head -c 10 < /dev/random | uuencode -m - | tail -n 2 | head -n 1 | cut -c 1-8 | tr -cd "[:alnum:]"`
+
+  # if file already exist, re-generates an other filename
   if [ -e "$r" ] ; then
     random_filename
   fi
