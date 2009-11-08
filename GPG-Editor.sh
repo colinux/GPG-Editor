@@ -20,12 +20,10 @@ GPG_KEY=E0228A97
 GPG_OPTIONS="--armor"
 
 
-
-
 FILE=$1
 
 if [ -z "$FILE" ] ; then
-  echo "Usage: gpg-write.sh <file>" >&2
+  echo "Usage: $0 <encrypted-file>" >&2
   exit 1
 fi
 
